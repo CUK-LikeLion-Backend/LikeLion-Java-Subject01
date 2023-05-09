@@ -1,7 +1,5 @@
 package ex07;
 
-import ex05.LikeList;
-
 public class LikeTree {
     private Node root;
 
@@ -40,7 +38,7 @@ public class LikeTree {
                         currentNode.left = new Node(data); //왼쪽에 데이터 저장
                         return;
                     }
-                    currentNode = currentNode.left;
+                    currentNode = currentNode.left; //중간에 끼는게 안되므로 밑에 줄줄이 넣을 수 있도록 현재노드를 자식노드로 변경
                 }
                 else{ //currentNode보다 크면
                     //currentNode = currentNode.right; //currentNode가 오른쪽 아래로 내려감
@@ -78,7 +76,8 @@ public class LikeTree {
                 return root.right;
             }
             //삭제할 노드의 자식노드가 둘 다 있을 경우 (오른쪽 서브트리에서 가장 작은 노드 or 왼쪽서브트리에서 가장 큰 노드)
-            int smallest = small(root);
+            int smallest = small(root.right);
+
             root.data = smallest; //오른쪽 서브트리에서 가장 작은 노드 올리기
             root.right = remove(root.right, smallest); //올렸으니까 값 삭제
             return root;
@@ -88,17 +87,15 @@ public class LikeTree {
             root.left = remove(root.left, data);
             return root;
         }
-
+        else{
         root.right = remove(root.right, data);
         return root;
+        }
     }
 
     //오른쪽 노드에서 가장 작은 값을 올리기 위해 small구하기
     public int small(Node root){
-        if (root.left == null)
-            return root.data;
-        else
-            return small(root.right);
+        return root.left == null ? root.data : small(root.right);
     }
 
     // 삭제 메서드
@@ -134,6 +131,7 @@ public class LikeTree {
         tree.insert(8);
         tree.insert(6);
         tree.insert(7);
+        tree.insert(12);
 
         tree.remove(tree.root, 7);
         tree.remove(tree.root, 10);

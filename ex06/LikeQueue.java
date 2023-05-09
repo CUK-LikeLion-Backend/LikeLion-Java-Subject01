@@ -24,15 +24,17 @@ public class LikeQueue {
         rear = newNode;
     }
     // 삭제 함수
-    public int dequeue() {
+    public void dequeue() {
         if(isEmpty()){
-            return -999;
+            System.out.println("빈 큐입니다.\n");
+            return;
         }
         // 가장 앞에 있는(가장 먼저 삽입된) 수 반환
         int x = front.data;
         list.head = front.next;
         front = front.next;
-        return x;
+        System.out.printf("%d 삭제\n", x);
+        return;
     }
 
     // 큐의 첫번쨰 값 조회

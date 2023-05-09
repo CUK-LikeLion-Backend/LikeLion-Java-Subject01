@@ -19,15 +19,17 @@ public class LikeStack {
         list.head = newNode;
     }
     // 삭제 함수
-    public int pop() {
+    public void pop() {
         //스택이 빈 경우
         if(isEmpty()){
-            return -999;
+            System.out.println("빈 스택입니다.\n");
+            return;
         }
 
         int x = list.head.data;
         list.head = list.head.next;
-        return x;
+        System.out.printf("%d 삭제\n", x);
+        return;
     }
     // 스택의 마지막 값 조회
     public int peek() {
@@ -55,10 +57,10 @@ public class LikeStack {
         stack.push(3); // 3 2 1
         System.out.println(stack.peek()); // 3
 
-        System.out.println(stack.pop()); // 3 삭제
-        System.out.println(stack.pop()); // 2 삭제
-        System.out.println(stack.pop()); // 1 삭제
-        System.out.println(stack.pop()); // -999(empty)
+        stack.pop(); // 3 삭제
+        stack.pop(); // 2 삭제
+        stack.pop(); // 1 삭제
+        stack.pop(); // 빈 스택입니다.
     }
 
 }

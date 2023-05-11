@@ -1,5 +1,5 @@
 package ex05;
-
+//수정 ㅇ
 public class LikeList {
     private static int top=-1;
     public static void main(String[] args) {
@@ -8,7 +8,6 @@ public class LikeList {
         myList.insert(1,1);
         myList.insert(2,2);
         myList.insert(3,99);
-        System.out.println("최고위층은"+top);
         myList.print();
         myList.delete(1);
         System.out.println(myList.get(3));
@@ -31,15 +30,19 @@ public class LikeList {
         Node newNode = new Node(data);
         if (head == null) {
             head = newNode;
+        } else if (index == 0) {
+            newNode.next = head;
+            head = newNode;
         } else {
+            int count = 0;
             Node current = head;
-            while (current.next != null) {
+            while (count < index - 1 && current.next != null) {
                 current = current.next;
+                count++;
             }
+            newNode.next = current.next;
             current.next = newNode;
-
         }
-
     }
 
     // 삭제 메서드, index 위치에 노드 삭제
@@ -67,19 +70,19 @@ public class LikeList {
     }
 
     // 전체 노드 출력 메서드
-        public void print() {
-            Node current = head;
+    public int print() {
+        Node current = head;
 
-            while (current != null) {
-                System.out.println(current.data + " ");
-                current = current.next;
-            }
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+        System.out.println(" ");
+        return 0;
     }
-
 
     //입력된 인덱스의 값을 꺼내줌
     public int get(int index) {
-        System.out.println("최고위층"+top);
         if (index > top || index < 0) {
             throw new IndexOutOfBoundsException();
         }

@@ -1,4 +1,6 @@
-//스택만들기 Likelist 활용!
+//스택만들기 Likelist 활용! 후입선출
+//수정 ㅇ
+
  package ex05;
 
 public class LikeStack {
@@ -13,29 +15,29 @@ public class LikeStack {
     public static void main(String[] args) {
         LikeStack stack = new LikeStack();
         stack.push(0);//top=0
-        System.out.println("최고위층"+top);
         stack.push(1);//top=1
-        System.out.println("최고위층"+top);
         stack.push(2); //top=2
-        System.out.println("최고위층"+top);
-        stack.pop();//top=2->1
-        System.out.println("최고위층"+top);
         stack.peek();//top=1
+
+        stack.pop();//top=2->1
+        stack.pop();
+        stack.pop();
         stack.isEmpty();//false
         System.out.println(stack.isEmpty());
 
     }
     // 추가
     public int push(int value) {
+        ++top;
         list.insert(top,value);
-        System.out.println(top+"에"+value + " 값을 추가하겠습니다.");
-        return ++top;
+        list.print();
+        return top;
     }
     // 삭제
     public int pop() {
         int removedValue=list.get(top);
         list.delete(list.get(top));//최고위층 값을 삭제해야함
-        System.out.println(removedValue + " 값을 삭제하겠습니다.");
+        list.print();
         return --top;
     }
     // 스택의 마지막 값 조회

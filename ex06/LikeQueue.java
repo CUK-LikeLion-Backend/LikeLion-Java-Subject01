@@ -1,16 +1,15 @@
 package ex06;
 //큐: 선입선출
+//수정 ㅇ
 
 public class LikeQueue {
 
     // ex04에서 만든 LikeList 사용
     private LikeList list;
     private static int top; //시작당시 최고위층은 -1층! =인덱스 번호
-    private static int bottom; // 최하위층은 0에서 한 층씩 위로 업데이트?
     public LikeQueue(){
         list=new LikeList();
         top = -1;
-        bottom = 0;
     }
 
 
@@ -29,10 +28,9 @@ public class LikeQueue {
     }
         // 추가
     public int enqueue(int value) {
-        list.insert(top,value);
         ++top;
-        System.out.println(top+"에"+value + " 값을 추가하겠습니다.");
-//        list.print(); //확인용 전체리스트 값
+        list.insert(top,value);
+        list.print(); //확인용 전체리스트 값
         return top;
     }
     // 삭제
@@ -40,9 +38,7 @@ public class LikeQueue {
         if(isEmpty()) {
             System.out.println("큐가 비어있습니다.");
         }
-        int value = list.get(bottom);
-        System.out.println(bottom+"번 째의 값" +value + "을 제거하였습니다.");
-        list.delete(bottom);
+        list.delete(0);
         list.print(); //확인용 전체리스트 값
     }
     // 큐의 첫번쨰 값 조회
@@ -51,10 +47,11 @@ public class LikeQueue {
             System.out.println("큐가 비어있습니다.");
             return -1;
         }
-        return list.get(bottom);
+        
+        return list.get(0);
     }
     // 큐가 비었는지 확인
     public boolean isEmpty() {
-        return list.get(bottom)==-1; //최하위값이 null일때, get메소드에서 -1 리턴, 이게 참이면 큐가 빈 것.
+        return list.get(0)==-1; //최하위값이 null일때, get메소드에서 -1 리턴, 이게 참이면 큐가 빈 것.
     }
 }

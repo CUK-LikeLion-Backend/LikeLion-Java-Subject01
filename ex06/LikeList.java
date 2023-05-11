@@ -1,19 +1,18 @@
 package ex06;
+//수정 ㅇ
 
 public class LikeList {
     private static int top=-1;
-    private static int bottom=0;//최하위층 인덱스0번부터 시작
-
     public static void main(String[] args) {
         LikeList myList =new LikeList();
-        myList.insert(0,0);
-        myList.insert(1,1);
-        myList.insert(2,2);
-        myList.insert(3,99);
-        System.out.println("최고위층은"+top);
+        myList.insert(2,0);
+        myList.insert(3,1);
+        myList.insert(0,2);
+        myList.insert(1,99);
         myList.print();
-        myList.delete(1);
-        System.out.println(myList.get(3));
+        myList.delete(3);
+        myList.print();
+        System.out.println(myList.get(1));
     }
     private Node head; //head는 연결리스트 맨 앞, 첫번째 노드를 가리킴
 
@@ -28,26 +27,29 @@ public class LikeList {
     }
     // 삽입 메서드, index 위치에 노드 추가
     public void insert(int index, int data) {
-        ++top; //push가 실행되면, 한층 위로 올라감.
+        top++; //push가 실행되면, 한층 위로 올라감.
 
         Node newNode = new Node(data);
         if (head == null) {
             head = newNode;
+        } else if (index == 0) {
+            newNode.next = head;
+            head = newNode;
         } else {
+            int count = 0;
             Node current = head;
-            while (current.next != null) {
+            while (count < index - 1 && current.next != null) {
                 current = current.next;
+                count++;
             }
+            newNode.next = current.next;
             current.next = newNode;
-
         }
-
     }
 
     // 삭제 메서드, index 위치에 노드 삭제
         //리스트 요소를 삭제하려면, 현재 요소를 다음 인덱스의 요소로 바꿔줌. 삭제할 노드 건너뛰어서 연결 연결 해줘야함
     public void delete(int index) {
-//        bottom++; //pop가 실행되면, 한층 위로 올라감.
 
         if (head == null) { //리스트가 비어있는 경우
                 return;
@@ -73,10 +75,10 @@ public class LikeList {
             Node current = head;
 
             while (current != null) {
-                System.out.print(current.data + ",");
+                System.out.print(current.data + " ");
                 current = current.next;
             }
-            System.out.println(".");
+            System.out.println(" ");
             return 0;
         }
 
